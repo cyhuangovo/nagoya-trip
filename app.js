@@ -55,16 +55,3 @@ function renderAdminCandidates(){const list=candidates(),box=$('#adminCandidates
 function removeCandidate(i){let l=candidates();l.splice(i,1);setCandidates(l);renderAdminCandidates();renderCandidates()}
 function ask(){let q=$('#q').value.trim();if(!q)return;$('#chat').innerHTML+=`<div class="msg">${q}</div>`;$('#q').value='';let a='目前可回答行程、住宿、航班、目前位置。';if(q.includes('住'))a=`今晚住宿：${day().stay}`;else if(q.includes('回台')||q.includes('班機'))a='10/1 星宇 JX839，19:55 NGO T1 起飛，22:00 抵達桃園 T1。';else if(q.includes('吃')){const m=mergedMeals(day()),names=[...m.breakfast,...m.lunch,...m.dinner].map(x=>x.name);a=names.length?'今天餐點：'+names.join('、'):'今天還沒有安排餐廳。';}else if(q.includes('現在')||q.includes('哪裡'))a=`目前：${$('#current').textContent}；下一站：${$('#next').textContent}`;$('#chat').innerHTML+=`<div class="msg">${a}</div>`}
 load();
-
-// Accessible text sizing. Saved per device/browser.
-let fontStep=Number(localStorage.tripFontStep||0);
-function applyFontSize(){
-  const scale=[0.9,1,1.12,1.25,1.4][Math.max(0,Math.min(4,fontStep+1))];
-  document.documentElement.style.setProperty('--font-scale',scale);
-}
-function changeFont(delta){
-  fontStep=Math.max(-1,Math.min(3,fontStep+delta));
-  localStorage.tripFontStep=fontStep;
-  applyFontSize();
-}
-applyFontSize();
