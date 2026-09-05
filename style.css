@@ -122,3 +122,11 @@ html{font-size:calc(16px * var(--font-scale,1))}
   .eyebrow{font-size:9px}
   .bannerArt{width:38%;height:138px;right:0}
 }
+
+
+/* v9.4 movement timeline */
+.moveEvent{background:rgba(113,129,104,.06);margin:0 -10px;padding:13px 10px;border-radius:10px}
+.moveLabel{font-size:10px;font-weight:700;color:var(--green);letter-spacing:.04em;margin-bottom:3px}
+.moveEvent .place{font-size:15px}
+.routeBtn{background:var(--green);color:#fff;border-color:var(--green)}
+@media(max-width:390px){.moveEvent{margin:0 -6px;padding-left:6px;padding-right:6px}.routeBtn{padding:7px 8px}}
