@@ -14,7 +14,7 @@ function isBackup(x){return String(x?.status||'').trim()==='備選'}
 function isConfirmed(x){return !isBackup(x)}
 function norm(s){return String(s||'').replace(/\s+/g,'').toLowerCase()}
 function timeValue(s){const m=String(s||'').match(/(\d{1,2})\s*[:：]\s*(\d{2})/);return m?Number(m[1])*60+Number(m[2]):99999}
-function candidateAttractions(dayNum){return notionForDay(dayNum).filter(x=>x.type==='景點'&&isBackup(x)).map(x=>({day:dayNum,name:x.name,url:x.mapUrl||'',image:x.imageUrl||'',hints:x.hints||[]}))}
+function candidateAttractions(dayNum){return notionForDay(dayNum).filter(x=>x.type==='景點'&&isBackup(x)).map(x=>({day:dayNum,name:x.name,url:x.mapUrl||'',image:x.imageUrl||'',hints:x.hints||[],description:x.description||''}))}
 async function load(){
  data=await fetch('trip.json').then(r=>r.json());
  try{
@@ -30,34 +30,32 @@ function applyNotionToTrip(){
   const items=notionForDay(d.day);
   const confirmed=items.filter(isConfirmed);
 
-  // 既有時間軸：同名資料由 Notion 覆蓋時間、導航與提示。
-  d.events.forEach(e=>{
-   const n=confirmed.find(x=>norm(x.name)===norm(e.place));
-   if(!n)return;
-   if(n.time)e.time=n.time;
-   if(n.mapUrl)e.map=n.mapUrl;
-   if(n.hints?.length)e.hints=n.hints;
-   if(n.type)e.type=n.type;
-  });
+  // Notion 是正式行程的唯一來源：不再把 trip.json 的舊時間軸混進來，避免重複。
+  // 只要「確定 + 有時間」，就會依 Notion 建立當天時間軸。
+  d.events=confirmed
+   .filter(x=>x.time)
+   .filter(x=>['景點','餐廳','住宿','交通','移動'].includes(x.type))
+   .map(x=>({
+    time:x.time,
+    place:x.name,
+    detail:x.description||'',
+    map:x.mapUrl||null,
+    hints:x.hints||[],
+    type:x.type||''
+   }))
+   .sort((a,b)=>timeValue(a.time)-timeValue(b.time));
 
-  // Notion 新增且有「時間」的確定景點／交通／移動，可直接加入時間軸。
-  confirmed
-   .filter(x=>x.time&&['景點','交通','移動'].includes(x.type))
-   .filter(x=>!d.events.some(e=>norm(e.place)===norm(x.name)))
-   .forEach(x=>d.events.push({time:x.time,place:x.name,detail:(x.hints||[]).join('、'),map:x.mapUrl||null,hints:x.hints||[],type:x.type||''}));
-
-  d.events.sort((a,b)=>timeValue(a.time)-timeValue(b.time));
-
-  // 圖集只使用「確定」景點；備選景點不會跑到主行程圖片。
+  // 圖集只使用「確定」景點。
   const pics=confirmed.filter(x=>x.type==='景點'&&x.imageUrl).map(x=>({url:x.imageUrl,alt:x.name}));
   if(pics.length)d.gallery=pics;
 
-  // 住宿由 Notion 更新名稱、地圖、圖片；若住宿有時間，也同步既有同名時間軸。
+  // 住宿資訊也以 Notion 為主。
   const stay=confirmed.find(x=>x.type==='住宿');
   if(stay){
    if(stay.name){d.stay=stay.name;d.stayDisplay=stay.name}
-   if(stay.mapUrl)d.stayMap=stay.mapUrl;
+   d.stayMap=stay.mapUrl||'';
    if(stay.imageUrl)d.stayImage=stay.imageUrl;
+   d.staySub=stay.description||'';
   }
  })
 }
@@ -75,14 +73,14 @@ function render(){
 }
 function renderCandidates(){
  const list=candidateAttractions(activeDay),box=$('#candidateGrid');
- box.innerHTML=list.length?list.map(x=>`<div class="candidate">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="candidateBody"><div class="candidateTitle">${x.name}</div>${x.hints?.length?`<div class="mealNote">${x.hints.join('、')}</div>`:''}${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>Google 地圖</button>`:''}</div></div>`).join(''):`<div class="note">目前沒有備選景點。</div>`
+ box.innerHTML=list.length?list.map(x=>`<div class="candidate">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="candidateBody"><div class="candidateTitle">${x.name}</div>${x.description?`<div class="mealNote">${x.description}</div>`:''}${x.hints?.length?`<div class="mealNote">${x.hints.join('、')}</div>`:''}${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>Google 地圖</button>`:''}</div></div>`).join(''):`<div class="note">目前沒有備選景點。</div>`
 }
 const mealLabels={breakfast:'早餐',lunch:'午餐',dinner:'晚餐'};
 function mergedMeals(d){
  const out={breakfast:[...(d.meals?.breakfast||[])],lunch:[...(d.meals?.lunch||[])],dinner:[...(d.meals?.dinner||[])]};
  const mealMap={'早餐':'breakfast','午餐':'lunch','晚餐':'dinner',breakfast:'breakfast',lunch:'lunch',dinner:'dinner'};
  const fromNotion={breakfast:[],lunch:[],dinner:[]};
- notionForDay(d.day).filter(x=>x.meal&&mealMap[x.meal]).forEach(x=>fromNotion[mealMap[x.meal]].push({name:x.name,url:x.mapUrl||'',image:x.imageUrl||'',note:(x.hints||[]).join('、'),status:x.status||'確定',time:x.time||''}));
+ notionForDay(d.day).filter(x=>x.meal&&mealMap[x.meal]).forEach(x=>fromNotion[mealMap[x.meal]].push({name:x.name,url:x.mapUrl||'',image:x.imageUrl||'',note:x.description||'',hints:x.hints||[],status:x.status||'確定',time:x.time||''}));
  Object.keys(fromNotion).forEach(k=>{if(fromNotion[k].length)out[k]=fromNotion[k]});
  return out
 }
@@ -94,7 +92,7 @@ function renderItinerary(){
  $('#itGallery').innerHTML=d.gallery.map(g=>`<div><img class="hero" src="${g.url}" alt="${g.alt}" loading="lazy"><div class="cap">${g.alt}</div></div>`).join('');
  $('#itTimeline').innerHTML=timelineHTML(d);
  $('#itFood').innerHTML=mealHTML(mergedMeals(d));
- const list=candidateAttractions(activeDay);$('#itCandidates').innerHTML=list.length?list.map(x=>`<div class="candidate">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="candidateBody"><div class="candidateTitle">${x.name}</div>${x.hints?.length?`<div class="mealNote">${x.hints.join('、')}</div>`:''}${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>Google 地圖</button>`:''}</div></div>`).join(''):`<div class="note">目前沒有備選景點。</div>`;
+ const list=candidateAttractions(activeDay);$('#itCandidates').innerHTML=list.length?list.map(x=>`<div class="candidate">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="candidateBody"><div class="candidateTitle">${x.name}</div>${x.description?`<div class="mealNote">${x.description}</div>`:''}${x.hints?.length?`<div class="mealNote">${x.hints.join('、')}</div>`:''}${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>Google 地圖</button>`:''}</div></div>`).join(''):`<div class="note">目前沒有備選景點。</div>`;
  $('#itStayName').textContent=d.stayDisplay||d.stay;$('#itStaySub').textContent=d.staySub||'';$('#itStayImage').src=d.stayImage||'';$('#itStayImage').style.display=d.stayImage?'block':'none';$('#itStayBtn').onclick=()=>openMapQuery(d.stayMap);
 }
 function mealHTML(meals){
@@ -102,7 +100,7 @@ function mealHTML(meals){
   const list=meals[k];
   if(!list.length)return `<div class="meal"><div class="mealTitle">${mealLabels[k]}</div><div class="detail">尚未安排</div></div>`;
   const confirmed=list.filter(x=>String(x.status||'確定')!=='備選'),backup=list.filter(x=>String(x.status||'')==='備選');
-  return `<div class="meal"><div class="mealTop"><div class="mealTitle">${mealLabels[k]}</div><div class="mealState ${confirmed.length===1&&backup.length===0?'confirmed':''}">${confirmed.length===1&&backup.length===0?'已確認':backup.length?`候選 ${backup.length} 家`:confirmed.length?`已安排 ${confirmed.length} 家`:'候選'}</div></div>${[...confirmed,...backup].map(x=>`<div class="mealPlace">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="mealInfo"><strong>${x.name}</strong>${x.status==='備選'?`<div class="mealNote">備選${x.time?`・${x.time}`:''}</div>`:x.time?`<div class="mealNote">${x.time}</div>`:''}${x.note?`<div class="mealNote">${x.note}</div>`:''}${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>${pin}<span>導航</span></button>`:''}</div></div>`).join('')}</div>`
+  return `<div class="meal"><div class="mealTop"><div class="mealTitle">${mealLabels[k]}</div><div class="mealState ${confirmed.length===1&&backup.length===0?'confirmed':''}">${confirmed.length===1&&backup.length===0?'已確認':backup.length?`候選 ${backup.length} 家`:confirmed.length?`已安排 ${confirmed.length} 家`:'候選'}</div></div>${[...confirmed,...backup].map(x=>`<div class="mealPlace">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="mealInfo"><strong>${x.name}</strong>${x.status==='備選'?`<div class="mealNote">備選${x.time?`・${x.time}`:''}</div>`:x.time?`<div class="mealNote">${x.time}</div>`:''}${x.note?`<div class="mealNote">${x.note}</div>`:''}${x.hints?.length?`<div class="eventHints">${x.hints.map(h=>`<span class="hintTag"># ${h}</span>`).join('')}</div>`:''}${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>${pin}<span>導航</span></button>`:''}</div></div>`).join('')}</div>`
  }).join('')
 }
 function ask(){let q=$('#q').value.trim();if(!q)return;$('#chat').innerHTML+=`<div class="msg">${q}</div>`;$('#q').value='';let a='目前可回答行程、住宿、航班、目前位置。';if(q.includes('住'))a=`今晚住宿：${day().stay}`;else if(q.includes('回台')||q.includes('班機'))a='10/1 星宇 JX839，19:55 NGO T1 起飛，22:00 抵達桃園 T1。';else if(q.includes('吃')){const m=mergedMeals(day()),names=[...m.breakfast,...m.lunch,...m.dinner].filter(x=>x.status!=='備選').map(x=>x.name);a=names.length?'今天餐點：'+names.join('、'):'今天還沒有確定餐廳。';}else if(q.includes('現在')||q.includes('哪裡'))a=`目前：${$('#current').textContent}；下一站：${$('#next').textContent}`;$('#chat').innerHTML+=`<div class="msg">${a}</div>`}

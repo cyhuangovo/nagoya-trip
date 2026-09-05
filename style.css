@@ -130,3 +130,20 @@ html{font-size:calc(16px * var(--font-scale,1))}
 .moveEvent .place{font-size:15px}
 .routeBtn{background:var(--green);color:#fff;border-color:var(--green)}
 @media(max-width:390px){.moveEvent{margin:0 -6px;padding-left:6px;padding-right:6px}.routeBtn{padding:7px 8px}}
+/* v9.5 — 移動項目刻意與景點拉開視覺層級 */
+.moveEvent{
+  grid-template-columns:56px minmax(0,1fr) auto;
+  margin:12px -12px;
+  padding:16px 12px;
+  background:#e9eee7;
+  border:1px solid #c8d2c3;
+  border-left:5px solid var(--green);
+  border-bottom:1px solid #c8d2c3;
+  border-radius:14px;
+  box-shadow:none;
+}
+.moveEvent .time{font-size:14px;font-weight:800}
+.moveLabel{font-size:11px;font-weight:800;color:var(--green);letter-spacing:.08em;margin-bottom:5px}
+.moveEvent .place{font-size:17px;font-weight:800}
+.moveEvent .detail{font-size:12px;margin-top:5px}
+.routeBtn{background:var(--green);color:#fff;border-color:var(--green);font-weight:700}
