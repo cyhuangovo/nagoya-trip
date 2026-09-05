@@ -39,11 +39,24 @@
           "map": "HISASHI 今池 Nagoya"
         }
       ],
-      "food": [
-        "今池周邊拉麵",
-        "今池周邊居酒屋",
-        "附近日式定食"
-      ]
+      "stayDisplay": "久HISASHI 今池 Nagoya",
+      "staySub": "名古屋・今池",
+      "stayImage": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/430312627.jpg?k=557992eb2440241a64d7f2d7539ed317122ef7d8284e7a8f958b5784a1344db3&o=",
+      "meals": {
+        "breakfast": [],
+        "lunch": [],
+        "dinner": [
+          {
+            "name": "今池周邊拉麵"
+          },
+          {
+            "name": "今池周邊居酒屋"
+          },
+          {
+            "name": "附近日式定食"
+          }
+        ]
+      }
     },
     {
       "day": 2,
@@ -108,11 +121,25 @@
           "map": "高山 さんまち通り"
         }
       ],
-      "food": [
-        "郡上八幡蕎麥麵",
-        "香魚料理",
-        "高山飛驒牛料理"
-      ]
+      "stayDisplay": "飛驒高山美居酒店",
+      "staySub": "Mercure Hida Takayama",
+      "stayImage": "https://mercure-hida-takayama.com/assets/images/project/6/021933ec923311bfd76e25264078af67.jpg",
+      "meals": {
+        "breakfast": [],
+        "lunch": [
+          {
+            "name": "郡上八幡蕎麥麵"
+          }
+        ],
+        "dinner": [
+          {
+            "name": "香魚料理"
+          },
+          {
+            "name": "高山飛驒牛料理"
+          }
+        ]
+      }
     },
     {
       "day": 3,
@@ -165,11 +192,25 @@
           "map": "Mercure Hida Takayama"
         }
       ],
-      "food": [
-        "白川鄉蕎麥麵",
-        "飛驒牛料理",
-        "白川鄉日式定食"
-      ]
+      "stayDisplay": "飛驒高山美居酒店",
+      "staySub": "Mercure Hida Takayama",
+      "stayImage": "https://mercure-hida-takayama.com/assets/images/project/6/021933ec923311bfd76e25264078af67.jpg",
+      "meals": {
+        "breakfast": [],
+        "lunch": [
+          {
+            "name": "白川鄉蕎麥麵"
+          }
+        ],
+        "dinner": [
+          {
+            "name": "飛驒牛料理"
+          },
+          {
+            "name": "白川鄉日式定食"
+          }
+        ]
+      }
     },
     {
       "day": 4,
@@ -222,11 +263,25 @@
           "map": "オアシス21"
         }
       ],
-      "food": [
-        "大須商店街小吃",
-        "榮商圈餐廳",
-        "名古屋特色料理"
-      ]
+      "stayDisplay": "京阪名古屋飯店",
+      "staySub": "Hotel Keihan Nagoya",
+      "stayImage": "https://www.hotelkeihan.co.jp/datas/cache/images/2024/06/17/800x_ea1e9d427fb5664c32c517a73e421e58_0e727b660726056c0333e86607507b921fd991a7.jpg",
+      "meals": {
+        "breakfast": [],
+        "lunch": [
+          {
+            "name": "大須商店街小吃"
+          }
+        ],
+        "dinner": [
+          {
+            "name": "榮商圈餐廳"
+          },
+          {
+            "name": "名古屋特色料理"
+          }
+        ]
+      }
     },
     {
       "day": 5,
@@ -261,11 +316,25 @@
           "map": "名古屋駅"
         }
       ],
-      "food": [
-        "宮きしめん",
-        "名古屋站鰻魚飯",
-        "百貨美食街"
-      ]
+      "stayDisplay": "京阪名古屋飯店",
+      "staySub": "Hotel Keihan Nagoya",
+      "stayImage": "https://www.hotelkeihan.co.jp/datas/cache/images/2024/06/17/800x_ea1e9d427fb5664c32c517a73e421e58_0e727b660726056c0333e86607507b921fd991a7.jpg",
+      "meals": {
+        "breakfast": [],
+        "lunch": [
+          {
+            "name": "宮きしめん"
+          }
+        ],
+        "dinner": [
+          {
+            "name": "名古屋站鰻魚飯"
+          },
+          {
+            "name": "百貨美食街"
+          }
+        ]
+      }
     },
     {
       "day": 6,
@@ -330,11 +399,25 @@
           "map": "桃園國際機場 第一航廈"
         }
       ],
-      "food": [
-        "AEON MALL 餐廳",
-        "常滑海鮮／日式料理",
-        "中部機場餐廳"
-      ]
+      "stayDisplay": "回家",
+      "staySub": "今晚回台灣",
+      "stayImage": "https://www.centrair.jp/en/__icsFiles/afieldfile/2025/12/19/EN_MV_2.png",
+      "meals": {
+        "breakfast": [],
+        "lunch": [
+          {
+            "name": "AEON MALL 餐廳"
+          }
+        ],
+        "dinner": [
+          {
+            "name": "常滑海鮮／日式料理"
+          },
+          {
+            "name": "中部機場餐廳"
+          }
+        ]
+      }
     }
   ]
 }
