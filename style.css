@@ -1,30 +1,16 @@
 
-:root{
- --sand:#eee8dc;--sand2:#f7f3eb;--paper:#fffdf8;--brown:#4d4035;--muted:#83796d;
- --line:#d8cfc1;--green:#6e7d67;--green-soft:#e1e6dd;--terracotta:#b87955;
-}
-*{box-sizing:border-box}body{margin:0;background:var(--sand2);color:var(--brown);font-family:"Noto Sans TC","PingFang TC",sans-serif}
-.app{max-width:500px;margin:auto;min-height:100vh;padding-bottom:82px}
-.header{padding:34px 22px 22px;background:var(--sand);border-bottom:1px solid var(--line)}
-.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--green);font-weight:700}
-h1{font-size:30px;margin:7px 0 4px;font-weight:700}.subtitle{font-size:14px;color:var(--muted)}
-.status{margin:20px 20px 10px;padding:16px 0;border-top:2px solid var(--terracotta);border-bottom:1px solid var(--line)}
-.statusGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.label{font-size:11px;color:var(--muted);margin-bottom:5px}.value{font-size:18px;font-weight:700}
-.section{padding:6px 20px 22px}.dayLabel{margin-top:19px;font-size:12px;color:var(--green);font-weight:700}
-.dayTitle{font-size:24px;font-weight:700;margin:5px 0 8px}.transport{font-size:13px;color:var(--muted);padding-bottom:13px;border-bottom:1px solid var(--line)}
-.hero{width:100%;height:190px;object-fit:cover;border-radius:10px;margin:16px 0 5px;background:var(--sand)}
-.photoCaption{font-size:11px;color:var(--muted);margin-bottom:12px}
-.event{display:grid;grid-template-columns:55px 1fr auto;gap:10px;padding:15px 0;border-bottom:1px solid var(--line);align-items:center}
-.time{font-size:13px;color:var(--green);font-weight:700}.place{font-size:16px;font-weight:700}.detail{font-size:12px;color:var(--muted);margin-top:3px}
-.navBtn{display:flex;align-items:center;gap:5px;text-decoration:none;color:var(--green);border:1px solid #bdc7b9;background:var(--green-soft);border-radius:8px;padding:7px 9px;font-size:12px;white-space:nowrap}
-.navBtn svg{width:14px;height:14px}.sectionHead{font-size:19px;font-weight:700;margin:26px 0 8px}
-.food{display:flex;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}.foodIcon{color:var(--terracotta);font-size:16px}
-.stay{margin-top:21px;padding:15px 0;border-top:2px solid var(--green);border-bottom:1px solid var(--line)}
-.dayList{padding:0 20px}.dayRow{display:grid;grid-template-columns:52px 1fr 20px;gap:8px;padding:17px 0;border-bottom:1px solid var(--line);align-items:center;cursor:pointer}
-.dayNo{font-size:18px;color:var(--terracotta);font-weight:700}.dayRow strong{display:block}.dayRow small{color:var(--muted)}
-.view{display:none}.view.active{display:block}
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(500px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(247,243,235,.97);border-top:1px solid var(--line)}
-.nav button{border:0;background:none;padding:9px 2px 12px;color:var(--muted);font-size:10px}.nav button.active{color:var(--green);font-weight:700}.nav svg{display:block;width:19px;height:19px;margin:0 auto 4px}
-.panel{padding:22px 20px}.note{font-size:13px;line-height:1.7;color:var(--muted)}.booking{padding:15px 0;border-bottom:1px solid var(--line)}
-.form label{display:block;font-size:11px;color:var(--muted);margin-top:15px}.form input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:10px 0;font:inherit}.save{margin-top:20px;border:0;border-radius:8px;padding:11px 16px;background:var(--green);color:white;font:inherit}
-.chatInput{display:flex;border-bottom:1px solid var(--brown);margin-top:18px}.chatInput input{flex:1;border:0;background:none;padding:12px 0;outline:none;font:inherit}.chatInput button{border:0;background:none;color:var(--green);font-weight:700}.msg{padding:12px 0;border-bottom:1px solid var(--line)}
+:root{--earth:#e6dac9;--earth2:#f4ede4;--paper:#fffaf3;--brown:#4d4035;--muted:#807466;--line:#d6c7b6;--green:#708166;--green-soft:#e4e9df;--orange:#c77b46;--orange-soft:#f0ddcc}
+*{box-sizing:border-box}body{margin:0;background:var(--earth2);color:var(--brown);font-family:"Noto Sans TC","PingFang TC",sans-serif}.app{max-width:560px;margin:auto;min-height:100vh;padding-bottom:82px}
+.header{padding:34px 22px 22px;background:var(--earth)}.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--green);font-weight:700}h1{font-size:30px;margin:7px 0 4px}.subtitle{font-size:14px;color:var(--muted)}
+.status,.section,.panel{padding-left:20px;padding-right:20px}.status{margin-top:20px;padding-top:16px;padding-bottom:16px;border-top:2px solid var(--orange);border-bottom:1px solid var(--line)}.statusGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.label{font-size:11px;color:var(--muted);margin-bottom:5px}.value{font-size:18px;font-weight:700}
+.dayLabel{margin-top:20px;color:var(--green);font-size:12px;font-weight:700}.dayTitle{font-size:24px;font-weight:700;margin:4px 0 8px}.transport{font-size:13px;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--line)}
+.gallery{display:grid;grid-auto-flow:column;grid-auto-columns:83%;gap:10px;overflow-x:auto;padding:16px 0 8px}.hero{width:100%;height:210px;object-fit:cover;border-radius:12px;background:var(--earth)}.cap{font-size:11px;color:var(--muted);margin-top:4px}
+.event{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:10px;padding:15px 0;border-bottom:1px solid var(--line);align-items:center}.time{font-size:13px;color:var(--green);font-weight:700}.place{font-size:16px;font-weight:700}.detail{font-size:12px;color:var(--muted);margin-top:3px}
+.navBtn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;color:var(--green);border:1px solid #bdc7b9;background:var(--green-soft);border-radius:8px;padding:7px 9px;font-size:12px;white-space:nowrap}.sectionHead{font-size:19px;font-weight:700;margin:26px 0 8px}
+.food{padding:12px 0;border-bottom:1px solid var(--line)}.candidateGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.candidate{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}.candidate img{width:100%;height:110px;object-fit:cover;background:var(--earth)}.candidateBody{padding:10px}.candidateTitle{font-weight:700;font-size:14px}.candidateActions{display:flex;gap:6px;margin-top:8px}.tiny{font-size:11px;padding:6px 8px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--green)}
+.stay{margin-top:20px;padding:15px 0;border-top:2px solid var(--green);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.dayList{padding:0 20px}.dayRow{display:grid;grid-template-columns:52px 1fr 20px;gap:8px;padding:17px 0;border-bottom:1px solid var(--line);align-items:center}.dayNo{font-size:18px;color:var(--orange);font-weight:700}.dayRow small{color:var(--muted)}
+.view{display:none}.view.active{display:block}.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(244,237,228,.97);border-top:1px solid var(--line);z-index:20}.nav button{border:0;background:none;padding:9px 2px 12px;color:var(--muted);font-size:10px}.nav button.active{color:var(--green);font-weight:700}.nav svg{display:block;width:19px;height:19px;margin:0 auto 4px}
+.note{font-size:13px;line-height:1.7;color:var(--muted)}.booking{padding:15px 0;border-bottom:1px solid var(--line)}.form label{display:block;font-size:11px;color:var(--muted);margin-top:15px}.form input,.form select{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:10px 0;font:inherit}.save,.add{margin-top:18px;border:0;border-radius:8px;padding:11px 16px;color:white;font:inherit}.save{background:var(--green)}.add{background:var(--orange)}.adminBlock{margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}.adminCandidates{margin-top:12px}.adminCandidate{padding:10px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}.remove{border:0;background:none;color:var(--orange)}
+.chatInput{display:flex;border-bottom:1px solid var(--brown);margin-top:18px}.chatInput input{flex:1;border:0;background:none;padding:12px 0;outline:none}.chatInput button{border:0;background:none;color:var(--green);font-weight:700}.msg{padding:12px 0;border-bottom:1px solid var(--line)}
+@media (min-width:700px){.app{max-width:760px}.nav{width:min(760px,100%)}.status,.section,.panel,.dayList{padding-left:34px;padding-right:34px}.gallery{grid-auto-columns:48%}.candidateGrid{grid-template-columns:repeat(3,1fr)}}

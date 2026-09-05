@@ -1,6 +1,7 @@
-# 名古屋・高山之旅 v4
-- 主色改為大地色：沙色、米白、咖啡
-- 綠色只作輔色
-- 每個可定位景點都有明確「導航」按鈕
-- 每日照片改成真正對應當日地點的圖片網址
-- 如果你有偏好的照片，只需要更換 trip.json 的 image 欄位
+# 名古屋・高山之旅 v6
+- iPhone / iPad 導航按鈕改用 Google Maps iOS URL Scheme，會直接嘗試開啟 Google Maps App。
+- 飯店也有直接導航。
+- 管理頁新增候選景點管理：Day、Google Maps URL、名稱、圖片 URL。
+- 候選景點顯示在首頁當日的「候選景點」區。
+- 目前為靜態 GitHub Pages，本機資料儲存在 localStorage。
+- 若要只貼 Google Maps 連結便自動取得官方地點名稱與 Google 地點照片，需要接 Google Places API / 後端。

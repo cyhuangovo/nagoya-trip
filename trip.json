@@ -6,8 +6,13 @@
       "title": "桃園 → 名古屋 → 今池",
       "transport": "星宇航空＋機場接送",
       "stay": "HISASHI 今池 Nagoya",
-      "image": "https://www.centrair.jp/en/__icsFiles/afieldfile/2025/12/19/EN_MV_2.png",
-      "imageAlt": "中部國際機場 Centrair",
+      "stayMap": "HISASHI 今池 Nagoya",
+      "gallery": [
+        {
+          "url": "https://www.centrair.jp/en/__icsFiles/afieldfile/2025/12/19/EN_MV_2.png",
+          "alt": "中部國際機場 Centrair"
+        }
+      ],
       "events": [
         {
           "time": "14:55",
@@ -46,8 +51,13 @@
       "title": "郡上八幡 → 高山",
       "transport": "租車",
       "stay": "Mercure Hida Takayama",
-      "image": "https://tabisumu.jp/images/municipality/21_032_03.jpg",
-      "imageAlt": "郡上八幡",
+      "stayMap": "Mercure Hida Takayama",
+      "gallery": [
+        {
+          "url": "https://tabisumu.jp/images/municipality/21_032_03.jpg",
+          "alt": "郡上八幡"
+        }
+      ],
       "events": [
         {
           "time": "09:30",
@@ -110,8 +120,13 @@
       "title": "高山 → 白川鄉 → 高山",
       "transport": "租車",
       "stay": "Mercure Hida Takayama",
-      "image": "https://cdn-mapple.net/Normal/%E5%B2%90%E9%98%9C%E7%9C%8C/21000564_00044.jpg",
-      "imageAlt": "白川鄉合掌村",
+      "stayMap": "Mercure Hida Takayama",
+      "gallery": [
+        {
+          "url": "https://cdn-mapple.net/Normal/%E5%B2%90%E9%98%9C%E7%9C%8C/21000564_00044.jpg",
+          "alt": "白川鄉合掌村"
+        }
+      ],
       "events": [
         {
           "time": "09:00",
@@ -162,8 +177,13 @@
       "title": "高山 → 名古屋市區",
       "transport": "租車",
       "stay": "Hotel Keihan Nagoya",
-      "image": "https://www.nagoya-info.jp/upload/spots/large/7320799715e2ff7702f351.jpg",
-      "imageAlt": "大須觀音",
+      "stayMap": "Hotel Keihan Nagoya",
+      "gallery": [
+        {
+          "url": "https://www.nagoya-info.jp/upload/spots/large/7320799715e2ff7702f351.jpg",
+          "alt": "大須觀音"
+        }
+      ],
       "events": [
         {
           "time": "09:30",
@@ -214,8 +234,13 @@
       "title": "熱田神宮 → 名古屋站",
       "transport": "電車／計程車",
       "stay": "Hotel Keihan Nagoya",
-      "image": "https://idbackpacker.com/wp-content/uploads/2024/06/atsuta-jingu-shrine-tranquility-gods-and-a-sacred-sword-6.jpg",
-      "imageAlt": "熱田神宮",
+      "stayMap": "Hotel Keihan Nagoya",
+      "gallery": [
+        {
+          "url": "https://idbackpacker.com/wp-content/uploads/2024/06/atsuta-jingu-shrine-tranquility-gods-and-a-sacred-sword-6.jpg",
+          "alt": "熱田神宮"
+        }
+      ],
       "events": [
         {
           "time": "09:30",
@@ -248,8 +273,13 @@
       "title": "常滑 → 中部機場 → 桃園",
       "transport": "電車／計程車",
       "stay": "回家",
-      "image": "https://life-designs.jp/wp/wp-content/uploads/2019/04/image16-34.jpg",
-      "imageAlt": "常滑招財貓",
+      "stayMap": "桃園國際機場 第一航廈",
+      "gallery": [
+        {
+          "url": "https://life-designs.jp/wp/wp-content/uploads/2019/04/image16-34.jpg",
+          "alt": "常滑招財貓"
+        }
+      ],
       "events": [
         {
           "time": "早上",
@@ -285,12 +315,6 @@
           "time": "17:00",
           "place": "中部國際機場 T1",
           "detail": "抵達機場",
-          "map": "中部国際空港 第1ターミナル"
-        },
-        {
-          "time": "17:30",
-          "place": "航空公司櫃檯",
-          "detail": "Check-in、托運行李",
           "map": "中部国際空港 第1ターミナル"
         },
         {
