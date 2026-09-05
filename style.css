@@ -30,3 +30,18 @@ h1{font-size:30px;margin:7px 0 4px;line-height:1.25}.subtitle{font-size:14px;col
 .stay{margin-top:0;padding:12px 0;border-top:1px solid var(--line);grid-template-columns:92px minmax(0,1fr) auto}.stayImage{width:92px;height:72px;object-fit:cover;border-radius:9px;background:var(--earth)}.stayBody .value{font-size:16px}.stayBody .detail{margin-top:4px}
 .restaurantHint{margin-top:10px}
 @media(max-width:390px){.header{min-height:165px}.headerCopy{width:72%}.bannerArt{width:48%;right:-30px}.stay{grid-template-columns:78px minmax(0,1fr) auto}.stayImage{width:78px;height:66px}}
+/* v8.1 banner/day refinement */
+.header{min-height:176px;align-items:flex-end}
+.bannerArt{right:8px;top:28px;width:42%;height:125px;opacity:1;mix-blend-mode:normal;overflow:hidden}
+.bannerArt img{width:355%;max-width:none;height:auto;transform:translate(-64%,-1%)}
+.dayLabel{margin-top:20px;font-size:0;color:inherit;font-weight:700;display:flex;align-items:baseline;gap:10px}
+.dayLabel .dayNo{font-size:26px;color:var(--orange);font-weight:700;letter-spacing:-.02em}
+.dayLabel .dayDate{font-size:19px;color:var(--text);font-weight:500}
+@media(max-width:390px){.bannerArt{width:41%;right:2px;top:30px}.dayLabel .dayNo{font-size:25px}.dayLabel .dayDate{font-size:18px}}
+/* v8.2: standalone illustration + day tabs */
+.bannerArt{right:10px;top:18px;width:44%;height:145px;overflow:visible;display:flex;align-items:center;justify-content:flex-end}
+.bannerArt img{width:100%;max-width:230px;height:auto;transform:none;object-fit:contain}
+.itineraryTabs{display:flex;gap:8px;overflow-x:auto;padding:14px 20px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.itineraryTabs::-webkit-scrollbar{display:none}
+.dayTab{flex:0 0 82px;border:0;background:#eee5d8;border-radius:11px;padding:10px 6px 9px;color:var(--text);font-family:inherit}.dayTab strong,.dayTab span{display:block}.dayTab strong{font-size:14px}.dayTab span{font-size:11px;margin-top:3px;color:var(--muted)}.dayTab.active{background:var(--green);color:#fff}.dayTab.active span{color:#f7f3ec}
+.itineraryDetail{padding-top:2px}
+@media(max-width:390px){.bannerArt{right:5px;top:24px;width:43%;height:125px}.dayTab{flex-basis:76px}}

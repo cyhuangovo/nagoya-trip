@@ -11,7 +11,7 @@ function setCandidates(v){localStorage.tripCandidates=JSON.stringify(v)}
 function restaurants(){try{return JSON.parse(localStorage.tripRestaurants||'[]')}catch{return[]}}
 function setRestaurants(v){localStorage.tripRestaurants=JSON.stringify(v)}
 async function load(){data=await fetch('trip.json').then(r=>r.json());applyRole();render();$$('[data-icon]').forEach(e=>e.innerHTML=icons[e.dataset.icon])}
-function nav(id,b){$$('.view').forEach(v=>v.classList.remove('active'));$('#'+id).classList.add('active');$$('.nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');if(id==='admin'){renderAdminCandidates();renderAdminRestaurants()}}
+function nav(id,b){$$('.view').forEach(v=>v.classList.remove('active'));$('#'+id).classList.add('active');$$('.nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');if(id==='admin'){renderAdminCandidates();renderAdminRestaurants()}if(id==='itinerary')renderItinerary()}
 function switchRole(){role=role==='family'?'admin':'family';localStorage.tripRole=role;applyRole();nav('today',$('.nav button'))}
 function applyRole(){
  const family=role==='family';$('#roleLabel').textContent=family?'切換管理者模式':'切換家人模式';
@@ -20,12 +20,12 @@ function applyRole(){
  $$('.familyOnly').forEach(e=>e.style.display='');
 }
 function render(){
- const d=day();$('#dayLabel').textContent=`DAY ${d.day}｜${d.date}`;$('#dayTitle').textContent=d.title;$('#transport').textContent=d.transport;
+ const d=day();$('#dayLabel').innerHTML=`<span class="dayNo">Day ${d.day}</span><span class="dayDate">${d.date}</span>`;$('#dayTitle').textContent=d.title;$('#transport').textContent=d.transport;
  $('#gallery').innerHTML=d.gallery.map(g=>`<div><img class="hero" src="${g.url}" alt="${g.alt}" loading="lazy"><div class="cap">${g.alt}</div></div>`).join('');
  $('#timeline').innerHTML=d.events.map(e=>`<div class="event"><div class="time">${e.time}</div><div><div class="place">${e.place}</div><div class="detail">${e.detail}</div></div>${e.map?`<button class="navBtn" onclick='openMapQuery(${JSON.stringify(e.map)})'>${pin}<span>導航</span></button>`:''}</div>`).join('');
  renderMeals(d);
  $('#stayName').textContent=d.stayDisplay||d.stay;$('#staySub').textContent=d.staySub||'';$('#stayImage').src=d.stayImage||'';$('#stayImage').style.display=d.stayImage?'block':'none';$('#stayBtn').onclick=()=>openMapQuery(d.stayMap);
- $('#days').innerHTML=data.days.map(x=>`<div class="dayRow" onclick="activeDay=${x.day};render();nav('today',$('.nav button'))"><div class="dayNo">0${x.day}</div><div class="dayMain"><strong>${x.title}</strong><div class="dayMeta"><span>${x.date}</span><span>•</span><span>${x.transport}</span></div></div><div class="dayArrow">›</div></div>`).join('');
+ renderItinerary();
  $('#current').textContent=localStorage.current||'旅程尚未開始';$('#next').textContent=localStorage.next||'9/26 桃園機場 T1';$('#adminCurrent').value=localStorage.current||'';$('#adminNext').value=localStorage.next||'';
  renderCandidates();
 }
@@ -33,8 +33,19 @@ function renderCandidates(){const list=candidates().filter(x=>Number(x.day)===ac
 function openShared(u){if(isIOS()&&/^https?:\/\/(www\.)?google\.[^/]+\/maps\//i.test(u))window.location.href=u.replace(/^https?:\/\//i,'comgooglemapsurl://');else window.location.href=u}
 const mealLabels={breakfast:'早餐',lunch:'午餐',dinner:'晚餐'};
 function mergedMeals(d){const out={breakfast:[...(d.meals?.breakfast||[])],lunch:[...(d.meals?.lunch||[])],dinner:[...(d.meals?.dinner||[])]};restaurants().filter(x=>Number(x.day)===activeDay).forEach(x=>out[x.meal].push(x));return out}
-function renderMeals(d){const meals=mergedMeals(d);$('#food').innerHTML=['breakfast','lunch','dinner'].map(k=>{const list=meals[k];if(!list.length)return `<div class="meal"><div class="mealTitle">${mealLabels[k]}</div><div class="detail">尚未安排</div></div>`;const confirmed=list.length===1;return `<div class="meal"><div class="mealTop"><div class="mealTitle">${mealLabels[k]}</div><div class="mealState ${confirmed?'confirmed':''}">${confirmed?'已確認':'候選 '+list.length+' 家'}</div></div>${list.map(x=>`<div class="mealPlace">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="mealInfo"><strong>${x.name}</strong>${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>${pin}<span>導航</span></button>`:''}</div></div>`).join('')}</div>`}).join('')}
-function addRestaurant(){const url=$('#restaurantUrl').value.trim(),dayNum=Number($('#restaurantDay').value),meal=$('#restaurantMeal').value;if(!url){alert('先貼 Google Maps 連結');return}const name=$('#restaurantName').value.trim()||guessName(url)||'Google Maps 餐廳';const image=$('#restaurantImage').value.trim();const list=restaurants();list.push({day:dayNum,meal,name,url,image});setRestaurants(list);$('#restaurantUrl').value='';$('#restaurantName').value='';$('#restaurantImage').value='';renderMeals(day());renderAdminRestaurants();alert('已加入餐廳')}
+function renderMeals(d){$('#food').innerHTML=mealHTML(mergedMeals(d));if($('#itFood'))$('#itFood').innerHTML=mealHTML(mergedMeals(d))}
+function renderItinerary(){
+ const d=day(),tabs=$('#dayTabs');if(!tabs)return;
+ tabs.innerHTML=data.days.map(x=>`<button class="dayTab ${x.day===activeDay?'active':''}" onclick="activeDay=${x.day};render()"><strong>Day ${x.day}</strong><span>${x.date}</span></button>`).join('');
+ $('#itDayLabel').innerHTML=`<span class="dayNo">Day ${d.day}</span><span class="dayDate">${d.date}</span>`;$('#itDayTitle').textContent=d.title;$('#itTransport').textContent=d.transport;
+ $('#itGallery').innerHTML=d.gallery.map(g=>`<div><img class="hero" src="${g.url}" alt="${g.alt}" loading="lazy"><div class="cap">${g.alt}</div></div>`).join('');
+ $('#itTimeline').innerHTML=d.events.map(e=>`<div class="event"><div class="time">${e.time}</div><div><div class="place">${e.place}</div><div class="detail">${e.detail}</div></div>${e.map?`<button class="navBtn" onclick='openMapQuery(${JSON.stringify(e.map)})'>${pin}<span>導航</span></button>`:''}</div>`).join('');
+ const meals=mergedMeals(d);$('#itFood').innerHTML=mealHTML(meals);
+ const list=candidates().filter(x=>Number(x.day)===activeDay);$('#itCandidates').innerHTML=list.length?list.map(x=>`<div class="candidate">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="candidateBody"><div class="candidateTitle">${x.name}</div><button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>Google 地圖</button></div></div>`).join(''):`<div class="note">目前沒有自訂候選景點。</div>`;
+ $('#itStayName').textContent=d.stayDisplay||d.stay;$('#itStaySub').textContent=d.staySub||'';$('#itStayImage').src=d.stayImage||'';$('#itStayImage').style.display=d.stayImage?'block':'none';$('#itStayBtn').onclick=()=>openMapQuery(d.stayMap);
+}
+function mealHTML(meals){return ['breakfast','lunch','dinner'].map(k=>{const list=meals[k];if(!list.length)return `<div class="meal"><div class="mealTitle">${mealLabels[k]}</div><div class="detail">尚未安排</div></div>`;const confirmed=list.length===1;return `<div class="meal"><div class="mealTop"><div class="mealTitle">${mealLabels[k]}</div><div class="mealState ${confirmed?'confirmed':''}">${confirmed?'已確認':'候選 '+list.length+' 家'}</div></div>${list.map(x=>`<div class="mealPlace">${x.image?`<img src="${x.image}" alt="${x.name}">`:''}<div class="mealInfo"><strong>${x.name}</strong>${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>${pin}<span>導航</span></button>`:''}</div></div>`).join('')}</div>`}).join('')}
+function addRestaurant(){const url=$('#restaurantUrl').value.trim(),dayNum=Number($('#restaurantDay').value),meal=$('#restaurantMeal').value;const name=$('#restaurantName').value.trim()||guessName(url);if(!name){alert('請填餐點或餐廳名稱');return}const image=$('#restaurantImage').value.trim();const list=restaurants();list.push({day:dayNum,meal,name,url,image});setRestaurants(list);$('#restaurantUrl').value='';$('#restaurantName').value='';$('#restaurantImage').value='';renderMeals(day());renderAdminRestaurants();alert('已加入餐廳')}
 function renderAdminRestaurants(){const list=restaurants(),box=$('#adminRestaurants');if(!box)return;box.innerHTML=list.length?list.map((x,i)=>`<div class="adminCandidate"><div><strong>Day ${x.day}｜${mealLabels[x.meal]}｜${x.name}</strong><div class="detail">${x.image?'有圖片':'尚未設定圖片'}</div></div><button class="remove" onclick="removeRestaurant(${i})">刪除</button></div>`).join(''):'<div class="note">尚未新增餐廳。</div>'}
 function removeRestaurant(i){let l=restaurants();l.splice(i,1);setRestaurants(l);renderAdminRestaurants();renderMeals(day())}
 function save(){localStorage.current=$('#adminCurrent').value||'旅程尚未開始';localStorage.next=$('#adminNext').value||'9/26 桃園機場 T1';render();alert('已儲存在這台裝置')}
