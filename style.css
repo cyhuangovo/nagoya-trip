@@ -78,56 +78,54 @@ html{font-size:calc(16px * var(--font-scale,1))}
 @media(min-width:700px){.bannerArt{width:190px;height:142px;right:20px;top:3px}.header h1{padding-right:120px}}
 
 
-/* v8.7 mobile-first final banner */
+
+/* v8.8 final mobile banner: true transparent PNG, no white card */
 .fontControls{display:none!important}
-html{font-size:16px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .header{
   position:relative;
-  min-height:158px;
-  padding:20px 18px 18px;
+  min-height:154px;
+  padding:18px 18px 17px;
   overflow:hidden;
 }
 .headerCopy{position:relative;z-index:2;width:100%}
 .eyebrow{
-  padding-right:48%;
-  min-height:18px;
   font-size:10px;
+  letter-spacing:.16em;
+  padding-right:36%;
+  white-space:nowrap;
 }
 .header h1{
-  font-size:28px;
-  line-height:1.16;
-  margin:12px 0 7px;
-  padding-right:44%;
-  max-width:none;
+  font-size:25px;
+  line-height:1.15;
+  margin:12px 0 8px;
+  padding-right:34%;
+  white-space:nowrap;
 }
 .tripDate{font-size:13px}
 .bannerArt{
   position:absolute;
-  right:4px;
-  top:8px;
-  width:48%;
-  height:140px;
-  overflow:hidden;
-  pointer-events:none;
+  right:2px;
+  top:12px;
+  width:41%;
+  height:132px;
   z-index:1;
-  background:transparent;
+  pointer-events:none;
+  overflow:visible;
+  background:transparent!important;
 }
 .bannerArt img{
   width:100%;
   height:100%;
   display:block;
-  object-fit:cover;
-  /* The supplied artwork already contains a large blank area on the left.
-     Shift/zoom within the image box so only the illustration occupies the
-     right side of the website header, without creating a visible white card. */
-  object-position:74% center;
-  transform:scale(1.72);
-  transform-origin:76% 54%;
-  mix-blend-mode:multiply;
+  object-fit:contain;
+  object-position:right center;
+  transform:none;
+  background:transparent!important;
 }
-@media(max-width:390px){
-  .header{min-height:150px;padding:18px 16px 16px}
-  .eyebrow{padding-right:49%;font-size:9.5px}
-  .header h1{font-size:26px;padding-right:44%;margin-top:11px}
-  .bannerArt{right:0;top:9px;width:49%;height:132px}
+@media(max-width:360px){
+  .header{padding-left:15px;padding-right:15px}
+  .header h1{font-size:23px;padding-right:32%}
+  .eyebrow{font-size:9px;padding-right:34%}
+  .bannerArt{width:39%;height:124px;right:0;top:14px}
 }
