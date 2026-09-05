@@ -124,41 +124,47 @@ function mealHTML(meals){
   const list=meals[k];
 
   if(!list.length){
-   return `<div class="meal"><div class="mealTitle">${mealLabels[k]}</div><div class="detail">尚未安排</div></div>`;
+   return `<div class="meal mealEmpty">
+    <div class="mealTop">
+     <div class="mealTitle">${mealLabels[k]}</div>
+     <div class="mealState muted">尚未安排</div>
+    </div>
+   </div>`;
   }
 
   const confirmed=list.filter(x=>String(x.status||'確定')!=='備選');
   const backup=list.filter(x=>String(x.status||'')==='備選');
 
-  let stateText='';
-  let stateClass='';
+  let headerState='';
+  let headerClass='';
 
-  if(list.length===1){
-   if(backup.length===1){
-    stateText='候選 1 家';
-   }else{
-    stateText='已確認';
-    stateClass='confirmed';
-   }
+  if(list.length===1 && backup.length===0){
+   headerState='已確認';
+   headerClass='confirmed';
   }else{
-   stateText=`候選 ${list.length} 家`;
+   headerState=`候選 ${list.length} 家`;
+   headerClass='candidate';
   }
 
-  return `<div class="meal">
+  const ordered=[...confirmed,...backup];
+
+  return `<div class="meal mealGroup">
    <div class="mealTop">
     <div class="mealTitle">${mealLabels[k]}</div>
-    <div class="mealState ${stateClass}">${stateText}</div>
+    <div class="mealState ${headerClass}">${headerState}</div>
    </div>
-   ${[...confirmed,...backup].map(x=>`<div class="mealPlace">
-    ${x.image?`<img src="${x.image}" alt="${x.name}">`:''}
-    <div class="mealInfo">
-     <strong>${x.name}</strong>
-     ${x.status==='備選'?`<div class="mealNote">備選${x.time?`・${x.time}`:''}</div>`:x.time?`<div class="mealNote">${x.time}</div>`:''}
-     ${x.note?`<div class="mealNote">${x.note}</div>`:''}
-     ${x.hints?.length?`<div class="eventHints">${x.hints.map(h=>`<span class="hintTag"># ${h}</span>`).join('')}</div>`:''}
-     ${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>${pin}<span>導航</span></button>`:''}
-    </div>
-   </div>`).join('')}
+   <div class="mealChoices">
+    ${ordered.map(x=>`<div class="mealPlace">
+      ${x.image?`<img src="${x.image}" alt="${x.name}">`:''}
+      <div class="mealInfo">
+       <strong>${x.name}</strong>
+       ${x.time?`<div class="mealNote">${x.time}</div>`:''}
+       ${x.note?`<div class="mealNote">${x.note}</div>`:''}
+       ${x.hints?.length?`<div class="eventHints">${x.hints.map(h=>`<span class="hintTag"># ${h}</span>`).join('')}</div>`:''}
+       ${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>${pin}<span>導航</span></button>`:''}
+      </div>
+    </div>`).join('')}
+   </div>
   </div>`;
  }).join('')
 }

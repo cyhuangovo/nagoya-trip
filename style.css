@@ -212,3 +212,101 @@ html{font-size:calc(16px * var(--font-scale,1))}
   .moveNavBtn span{display:none}
   .moveNavBtn{padding-left:6px;padding-right:6px}
 }
+
+
+/* v9.7 — 移動：淡底、低高度、實線分隔 */
+.moveLine{
+  display:grid;
+  grid-template-columns:56px minmax(0,1fr) auto;
+  gap:8px;
+  align-items:center;
+  min-height:46px;
+  margin:0;
+  padding:7px 8px;
+  background:rgba(116,139,111,.055);
+  border-top:1px solid rgba(116,139,111,.16);
+  border-bottom:1px solid rgba(116,139,111,.16);
+  border-radius:8px;
+}
+.moveTime{
+  font-size:13px;
+  line-height:1.35;
+  color:var(--green);
+  font-weight:800;
+}
+.moveSentence{
+  min-width:0;
+  font-size:12.5px;
+  line-height:1.4;
+  color:var(--brown);
+  white-space:normal;
+}
+.moveSentence strong{
+  font-size:13px;
+  font-weight:800;
+}
+.moveCar{
+  margin-right:5px;
+}
+.moveInlineDetail{
+  color:var(--muted);
+  font-weight:400;
+}
+.moveNavBtn{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  border:0;
+  background:transparent;
+  color:var(--green);
+  padding:4px 1px;
+  font-family:inherit;
+  font-size:10.5px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+/* 一般行程維持實線，與移動區塊形成差異 */
+.event{
+  border-bottom:1px solid var(--line);
+}
+
+/* 餐廳 B 方案：依餐期分組，標題只在餐廳區塊出現 */
+.mealGroup{
+  padding:14px 0 10px;
+  border-bottom:1px solid var(--line);
+}
+.mealEmpty{
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+.mealChoices{
+  margin-top:8px;
+}
+.mealPlace{
+  padding:10px 0;
+}
+.mealPlace + .mealPlace{
+  border-top:1px solid rgba(111,93,75,.10);
+}
+.mealState.candidate{
+  color:#b96d34;
+}
+.mealState.confirmed{
+  color:var(--green);
+}
+.mealState.muted{
+  color:var(--muted);
+}
+
+@media(max-width:390px){
+  .moveLine{
+    grid-template-columns:48px minmax(0,1fr) auto;
+    min-height:44px;
+    padding:6px 6px;
+    gap:6px;
+  }
+  .moveSentence{font-size:12px}
+  .moveSentence strong{font-size:12.5px}
+  .moveNavBtn span{display:none}
+}
