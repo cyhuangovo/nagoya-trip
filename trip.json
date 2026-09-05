@@ -1,0 +1,271 @@
+{
+  "title": "名古屋・高山之旅",
+  "dates": "2026.09.26 — 10.01",
+  "group": [
+    "爸爸",
+    "媽媽",
+    "姊姊",
+    "我",
+    "老公"
+  ],
+  "current": {
+    "place": "白川鄉 合掌村",
+    "status": "自由活動中",
+    "next": "15:30 返回高山",
+    "updated": "示範資料"
+  },
+  "days": [
+    {
+      "day": 1,
+      "date": "9/26（六）",
+      "title": "桃園 → 名古屋 → 今池",
+      "transport": "星宇航空＋機場接送",
+      "image": "nagoya.jpg",
+      "events": [
+        {
+          "time": "14:55",
+          "title": "桃園機場 T1 出發",
+          "detail": "星宇航空 JX838"
+        },
+        {
+          "time": "18:45",
+          "title": "抵達中部國際機場 T1",
+          "detail": "入境、領行李"
+        },
+        {
+          "time": "19:45",
+          "title": "搭乘預約機場接送",
+          "detail": "前往今池"
+        },
+        {
+          "time": "20:45",
+          "title": "入住 HISASHI 今池 Nagoya",
+          "detail": "入住後附近簡單晚餐"
+        }
+      ],
+      "restaurants": [
+        "今池周邊拉麵",
+        "今池周邊居酒屋",
+        "附近日式定食"
+      ],
+      "stay": "HISASHI 今池 Nagoya"
+    },
+    {
+      "day": 2,
+      "date": "9/27（日）",
+      "title": "今池 → 郡上八幡 → 高山",
+      "transport": "租車｜Nippon Rent-A-Car 今池站",
+      "image": "gujo.jpg",
+      "events": [
+        {
+          "time": "09:30",
+          "title": "今池出發",
+          "detail": "取車後前往郡上八幡"
+        },
+        {
+          "time": "11:00",
+          "title": "郡上八幡散步",
+          "detail": "宗祇水、職人町、食品模型等"
+        },
+        {
+          "time": "14:00",
+          "title": "前往高山",
+          "detail": "車程約 1 小時"
+        },
+        {
+          "time": "15:15",
+          "title": "Mercure Hida Takayama Check-in",
+          "detail": "放行李休息"
+        },
+        {
+          "time": "16:00",
+          "title": "高山老街傍晚散步",
+          "detail": "自由逛街"
+        }
+      ],
+      "restaurants": [
+        "蕎麥麵候選",
+        "香魚料理候選",
+        "飛驒牛料理候選"
+      ],
+      "stay": "Mercure Hida Takayama"
+    },
+    {
+      "day": 3,
+      "date": "9/28（一）",
+      "title": "高山 → 白川鄉 → 高山",
+      "transport": "租車",
+      "image": "shirakawago.jpg",
+      "events": [
+        {
+          "time": "09:00",
+          "title": "宮川朝市 & 高山老街",
+          "detail": "河畔朝市、採買點心"
+        },
+        {
+          "time": "11:00",
+          "title": "前往白川鄉",
+          "detail": "車程約 50 分鐘"
+        },
+        {
+          "time": "12:00",
+          "title": "白川鄉合掌村",
+          "detail": "午餐、展望台、村內散步"
+        },
+        {
+          "time": "15:30",
+          "title": "返回高山",
+          "detail": "回飯店休息"
+        }
+      ],
+      "restaurants": [
+        "白川鄉蕎麥麵",
+        "飛驒牛料理",
+        "白川鄉日式定食"
+      ],
+      "stay": "Mercure Hida Takayama"
+    },
+    {
+      "day": 4,
+      "date": "9/29（二）",
+      "title": "高山 → 名古屋市區",
+      "transport": "租車",
+      "image": "nagoya.jpg",
+      "events": [
+        {
+          "time": "09:30",
+          "title": "高山退房出發",
+          "detail": "返回名古屋"
+        },
+        {
+          "time": "12:30",
+          "title": "抵達名古屋市區",
+          "detail": "寄放行李、午餐"
+        },
+        {
+          "time": "14:00",
+          "title": "大須觀音 & 大須商店街",
+          "detail": "散步、購物"
+        },
+        {
+          "time": "17:30",
+          "title": "榮商圈 & 久屋大通公園",
+          "detail": "夜景、晚餐"
+        }
+      ],
+      "restaurants": [
+        "大須商店街候選",
+        "榮商圈候選",
+        "名古屋料理候選"
+      ],
+      "stay": "Hotel Keihan Nagoya"
+    },
+    {
+      "day": 5,
+      "date": "9/30（三）",
+      "title": "熱田神宮 → 名古屋站商圈",
+      "transport": "電車／計程車",
+      "image": "nagoya.jpg",
+      "events": [
+        {
+          "time": "09:30",
+          "title": "熱田神宮",
+          "detail": "綠蔭散步"
+        },
+        {
+          "time": "11:30",
+          "title": "宮きしめん",
+          "detail": "午餐候選"
+        },
+        {
+          "time": "13:30",
+          "title": "名驛百貨商圈",
+          "detail": "JR 高島屋／名鐵百貨等"
+        }
+      ],
+      "restaurants": [
+        "宮きしめん",
+        "名古屋站鰻魚飯候選",
+        "百貨美食街候選"
+      ],
+      "stay": "Hotel Keihan Nagoya"
+    },
+    {
+      "day": 6,
+      "date": "10/1（四）",
+      "title": "名古屋 → 常滑 → 機場 → 桃園",
+      "transport": "電車／計程車",
+      "image": "nagoya.jpg",
+      "events": [
+        {
+          "time": "早上",
+          "title": "飯店收走行李",
+          "detail": "行李先送往機場"
+        },
+        {
+          "time": "10:00",
+          "title": "退房前往常滑",
+          "detail": "輕裝移動"
+        },
+        {
+          "time": "11:00",
+          "title": "常滑招財貓通",
+          "detail": "平坦路段散步"
+        },
+        {
+          "time": "12:30",
+          "title": "AEON MALL 常滑",
+          "detail": "午餐、購物"
+        },
+        {
+          "time": "17:00",
+          "title": "抵達中部國際機場 T1",
+          "detail": "辦理登機、最後採買"
+        },
+        {
+          "time": "19:55",
+          "title": "星宇 JX839 起飛",
+          "detail": "22:00 抵達桃園 T1"
+        }
+      ],
+      "restaurants": [
+        "AEON 日式定食",
+        "常滑海鮮候選",
+        "機場餐廳候選"
+      ],
+      "stay": "回家"
+    }
+  ],
+  "bookings": [
+    {
+      "type": "flight",
+      "title": "星宇航空 JX838（去程）",
+      "detail": "9/26 14:55 TPE T1 → 18:45 NGO T1",
+      "attachment": "flight_booking.jpeg"
+    },
+    {
+      "type": "flight",
+      "title": "星宇航空 JX839（回程）",
+      "detail": "10/1 19:55 NGO T1 → 22:00 TPE T1",
+      "attachment": "flight_booking.jpeg"
+    },
+    {
+      "type": "stay",
+      "title": "HISASHI 今池 Nagoya",
+      "detail": "9/26 → 9/27",
+      "attachment": "hisashi_booking.png"
+    },
+    {
+      "type": "stay",
+      "title": "Mercure Hida Takayama",
+      "detail": "9/27 → 9/29",
+      "attachment": "mercure_booking.jpeg"
+    },
+    {
+      "type": "stay",
+      "title": "Hotel Keihan Nagoya",
+      "detail": "9/29 → 10/1",
+      "attachment": "keihan_booking2.jpeg"
+    }
+  ]
+}
