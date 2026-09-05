@@ -1,7 +1,7 @@
-# 名古屋・高山之旅 v6
-- iPhone / iPad 導航按鈕改用 Google Maps iOS URL Scheme，會直接嘗試開啟 Google Maps App。
-- 飯店也有直接導航。
-- 管理頁新增候選景點管理：Day、Google Maps URL、名稱、圖片 URL。
-- 候選景點顯示在首頁當日的「候選景點」區。
-- 目前為靜態 GitHub Pages，本機資料儲存在 localStorage。
-- 若要只貼 Google Maps 連結便自動取得官方地點名稱與 Google 地點照片，需要接 Google Places API / 後端。
+# 名古屋・高山之旅 v7
+- 手機介面優先，六日行程的「日期／交通」拆到第二行。
+- 保留 RWD，iPad/桌機只做基本放寬，不犧牲手機閱讀。
+- 家人模式只顯示：今天、行程、問 AI。
+- 管理者模式另外顯示：我的旅程、管理。
+- 目前角色切換只是介面差異，不是安全登入。
+- 私人附件不要上傳到 Public GitHub；正式附件上傳需接 Supabase/Firebase 等私有儲存。
