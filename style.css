@@ -147,3 +147,68 @@ html{font-size:calc(16px * var(--font-scale,1))}
 .moveEvent .place{font-size:17px;font-weight:800}
 .moveEvent .detail{font-size:12px;margin-top:5px}
 .routeBtn{background:var(--green);color:#fff;border-color:var(--green);font-weight:700}
+
+
+/* v9.6 — 移動改為一句式交通帶；不再像景點卡片 */
+.moveLine{
+  display:grid;
+  grid-template-columns:56px minmax(0,1fr) auto;
+  gap:9px;
+  align-items:center;
+  margin:7px 0;
+  padding:10px 0;
+  border-top:1px dashed #b9c4b5;
+  border-bottom:1px dashed #b9c4b5;
+  background:transparent;
+}
+.moveTime{
+  font-size:13px;
+  line-height:1.4;
+  color:var(--green);
+  font-weight:800;
+}
+.moveSentence{
+  min-width:0;
+  font-size:13px;
+  line-height:1.55;
+  color:var(--brown);
+}
+.moveSentence strong{
+  font-size:14px;
+  font-weight:800;
+}
+.moveCar{
+  margin-right:6px;
+}
+.moveInlineDetail{
+  color:var(--muted);
+  font-weight:400;
+}
+.moveNavBtn{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  border:0;
+  background:transparent;
+  color:var(--green);
+  padding:6px 2px;
+  font-family:inherit;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.moveNavBtn svg{flex:none}
+
+/* 舊版移動卡片樣式失效，避免任何殘留卡片感 */
+.moveEvent{display:none!important}
+
+@media(max-width:390px){
+  .moveLine{
+    grid-template-columns:48px minmax(0,1fr) auto;
+    gap:7px;
+  }
+  .moveSentence{font-size:12px}
+  .moveSentence strong{font-size:13px}
+  .moveNavBtn span{display:none}
+  .moveNavBtn{padding-left:6px;padding-right:6px}
+}
