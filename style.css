@@ -310,3 +310,242 @@ html{font-size:calc(16px * var(--font-scale,1))}
   .moveSentence strong{font-size:12.5px}
   .moveNavBtn span{display:none}
 }
+
+
+/* =========================================================
+   v9.8 FINAL
+   固定時間欄 / Emoji 統一 / 餐廳只在「今天吃什麼」
+   ========================================================= */
+
+.timelineRow{
+  display:grid;
+  grid-template-columns:64px minmax(0,1fr) auto;
+  column-gap:10px;
+  align-items:center;
+  padding:14px 0;
+  margin:0;
+  border-bottom:1px solid var(--line);
+  background:transparent;
+}
+.timelineTime{
+  grid-column:1;
+  font-size:16px;
+  line-height:1.2;
+  font-weight:800;
+  color:var(--green);
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.timelineContent{
+  grid-column:2;
+  min-width:0;
+}
+.timelineRow.event{
+  display:grid;
+  grid-template-columns:64px minmax(0,1fr) auto;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  background:transparent;
+}
+.timelineRow.event .navBtn{
+  grid-column:3;
+  align-self:center;
+}
+.eventTitleLine{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+}
+.eventTitleLine .place{
+  min-width:0;
+}
+.typeEmoji{
+  flex:none;
+  font-size:15px;
+  line-height:1;
+}
+
+/* 餐期只是一個小標記，不再像 hashtag */
+.mealCue{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  flex:none;
+  font-size:11px;
+  line-height:1;
+  font-weight:700;
+  color:#8e674e;
+}
+.mealCue span{font-size:14px}
+.mealCue.tea{color:#8b6d75}
+
+/* 移動：時間仍在完全相同的 64px 欄；淡底色只作用於右側內容 */
+.moveRow{
+  min-height:0;
+  padding:8px 0;
+}
+.moveContent{
+  position:relative;
+  padding:9px 11px;
+  border-radius:9px;
+  background:rgba(116,139,111,.055);
+  border:1px solid rgba(116,139,111,.09);
+}
+.moveMain{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+  font-size:14px;
+  line-height:1.35;
+  color:var(--brown);
+}
+.moveMain strong{
+  min-width:0;
+  font-size:14px;
+  font-weight:800;
+}
+.moveDetail{
+  margin:3px 24px 0 22px;
+  font-size:11px;
+  line-height:1.4;
+  color:var(--muted);
+}
+.moveNavBtn{
+  margin-left:auto;
+  flex:none;
+  border:0;
+  background:transparent;
+  color:var(--green);
+  font-size:25px;
+  line-height:1;
+  padding:0 1px;
+  font-family:inherit;
+}
+
+/* 清掉舊版 moveLine 規則，避免舊 grid/padding 影響對齊 */
+.moveLine,.moveTime,.moveSentence,.moveInlineDetail{all:unset}
+
+/* 餐廳 B 方案 */
+.mealGrid{
+  display:block;
+}
+.mealGroup,.mealEmpty{
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+}
+.mealTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
+.mealTitle{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:16px;
+  font-weight:800;
+}
+.mealHeadEmoji{
+  font-size:15px;
+  line-height:1;
+}
+.mealState{
+  font-size:11px;
+  font-weight:700;
+}
+.mealState.candidate{color:#b96d34}
+.mealState.confirmed{color:var(--green)}
+.mealState.muted{color:var(--muted)}
+.mealChoices{
+  margin:0;
+  border:1px solid rgba(111,93,75,.12);
+  border-radius:11px;
+  overflow:hidden;
+  background:rgba(255,255,255,.16);
+}
+.mealPlace{
+  display:grid;
+  grid-template-columns:68px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  margin:0;
+  padding:9px;
+}
+.mealPlace + .mealPlace{
+  border-top:1px solid rgba(111,93,75,.11);
+}
+.mealPlace img,.mealImagePlaceholder{
+  width:68px;
+  height:60px;
+  border-radius:8px;
+}
+.mealPlace img{
+  object-fit:cover;
+}
+.mealImagePlaceholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(116,139,111,.07);
+  font-size:18px;
+}
+.mealInfo{
+  min-width:0;
+}
+.mealInfo strong{
+  display:block;
+  font-size:14px;
+  line-height:1.35;
+}
+.mealTime{
+  margin-top:2px;
+  font-size:11px;
+  font-weight:700;
+  color:var(--green);
+}
+.mealNote{
+  margin-top:2px;
+  font-size:11px;
+  line-height:1.45;
+  color:var(--muted);
+}
+.mealNav{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  border:1px solid #b8c6b3;
+  border-radius:8px;
+  background:#eef2ea;
+  color:var(--green);
+  padding:7px 8px;
+  font-family:inherit;
+  font-size:10px;
+  white-space:nowrap;
+}
+.mealNav svg{flex:none}
+
+@media(max-width:390px){
+  .timelineRow,
+  .timelineRow.event{
+    grid-template-columns:58px minmax(0,1fr) auto;
+    column-gap:8px;
+  }
+  .timelineTime{font-size:15px}
+  .moveContent{padding:8px 9px}
+  .moveMain,.moveMain strong{font-size:13px}
+  .mealPlace{
+    grid-template-columns:60px minmax(0,1fr) auto;
+    gap:8px;
+    padding:8px;
+  }
+  .mealPlace img,.mealImagePlaceholder{
+    width:60px;
+    height:54px;
+  }
+  .mealNav span{display:none}
+}

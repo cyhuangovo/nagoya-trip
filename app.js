@@ -34,7 +34,7 @@ function applyNotionToTrip(){
   // 只要「確定 + 有時間」，就會依 Notion 建立當天時間軸。
   d.events=confirmed
    .filter(x=>x.time)
-   .filter(x=>['景點','餐廳','住宿','交通','移動'].includes(x.type))
+   .filter(x=>['景點','住宿','交通','移動'].includes(x.type))
    .map(x=>({
     time:x.time,
     place:x.name,
@@ -60,26 +60,46 @@ function applyNotionToTrip(){
  })
 }
 function nav(id,b){$$('.view').forEach(v=>v.classList.remove('active'));$('#'+id).classList.add('active');$$('.nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');if(id==='itinerary')renderItinerary()}
+function mealCue(hints=[]){
+ const values=(hints||[]).map(x=>String(x).trim());
+ if(values.includes('下午茶'))return {icon:'☕',label:'下午茶',kind:'tea'};
+ const meal=values.find(x=>['早餐','午餐','晚餐'].includes(x));
+ return meal?{icon:'🍴',label:meal,kind:'meal'}:null
+}
+function eventEmoji(type){
+ if(type==='住宿')return '🏨';
+ if(type==='交通')return '✈️';
+ return ''
+}
 function timelineHTML(d){
  return d.events.map(e=>{
   const moving=e.type==='移動';
+  const cue=mealCue(e.hints);
+  const visibleHints=(e.hints||[]).filter(h=>!['早餐','午餐','晚餐','下午茶'].includes(String(h).trim()));
 
   if(moving){
-   const detail=e.detail?`<span class="moveInlineDetail">・${e.detail}</span>`:'';
-   const nav=e.map?`<button class="moveNavBtn" onclick='openEventMap(${JSON.stringify(e.map)})'>${pin}<span>開始導航</span></button>`:'';
-   return `<div class="moveLine">
-    <span class="moveTime">${e.time||''}</span>
-    <div class="moveSentence"><span class="moveCar">🚗</span><strong>${e.place}</strong>${detail}</div>
-    ${nav}
+   const detail=e.detail?`<div class="moveDetail">${e.detail}</div>`:'';
+   const nav=e.map?`<button class="moveNavBtn" onclick='openEventMap(${JSON.stringify(e.map)})' aria-label="開始導航">›</button>`:'';
+   return `<div class="timelineRow moveRow">
+    <div class="timelineTime">${e.time||''}</div>
+    <div class="timelineContent moveContent">
+     <div class="moveMain"><span class="typeEmoji">🚗</span><strong>${e.place}</strong>${nav}</div>
+     ${detail}
+    </div>
    </div>`;
   }
 
-  return `<div class="event">
-   <div class="time">${e.time||''}</div>
-   <div class="eventText">
-    <div class="place">${e.place}</div>
+  const typeIcon=eventEmoji(e.type);
+  return `<div class="timelineRow event">
+   <div class="timelineTime">${e.time||''}</div>
+   <div class="timelineContent eventText">
+    <div class="eventTitleLine">
+     ${cue?`<span class="mealCue ${cue.kind}"><span>${cue.icon}</span><b>${cue.label}</b></span>`:''}
+     ${typeIcon?`<span class="typeEmoji">${typeIcon}</span>`:''}
+     <div class="place">${e.place}</div>
+    </div>
     <div class="detail">${e.detail||''}</div>
-    ${e.hints?.length?`<div class="eventHints">${e.hints.map(h=>`<span class="hintTag"># ${h}</span>`).join('')}</div>`:''}
+    ${visibleHints.length?`<div class="eventHints">${visibleHints.map(h=>`<span class="hintTag"># ${h}</span>`).join('')}</div>`:''}
    </div>
    ${e.map?`<button class="navBtn" onclick='openEventMap(${JSON.stringify(e.map)})'>${pin}<span>導航</span></button>`:''}
   </div>`;
@@ -126,7 +146,7 @@ function mealHTML(meals){
   if(!list.length){
    return `<div class="meal mealEmpty">
     <div class="mealTop">
-     <div class="mealTitle">${mealLabels[k]}</div>
+     <div class="mealTitle"><span class="mealHeadEmoji">🍴</span>${mealLabels[k]}</div>
      <div class="mealState muted">尚未安排</div>
     </div>
    </div>`;
@@ -134,35 +154,26 @@ function mealHTML(meals){
 
   const confirmed=list.filter(x=>String(x.status||'確定')!=='備選');
   const backup=list.filter(x=>String(x.status||'')==='備選');
-
-  let headerState='';
-  let headerClass='';
-
-  if(list.length===1 && backup.length===0){
-   headerState='已確認';
-   headerClass='confirmed';
-  }else{
-   headerState=`候選 ${list.length} 家`;
-   headerClass='candidate';
-  }
-
   const ordered=[...confirmed,...backup];
+
+  const headerState=list.length===1 && backup.length===0 ? '已確認 1 家' : `候選 ${list.length} 家`;
+  const headerClass=list.length===1 && backup.length===0 ? 'confirmed' : 'candidate';
 
   return `<div class="meal mealGroup">
    <div class="mealTop">
-    <div class="mealTitle">${mealLabels[k]}</div>
+    <div class="mealTitle"><span class="mealHeadEmoji">🍴</span>${mealLabels[k]}</div>
     <div class="mealState ${headerClass}">${headerState}</div>
    </div>
    <div class="mealChoices">
     ${ordered.map(x=>`<div class="mealPlace">
-      ${x.image?`<img src="${x.image}" alt="${x.name}">`:''}
+      ${x.image?`<img src="${x.image}" alt="${x.name}" loading="lazy">`:`<div class="mealImagePlaceholder">🍴</div>`}
       <div class="mealInfo">
        <strong>${x.name}</strong>
-       ${x.time?`<div class="mealNote">${x.time}</div>`:''}
+       ${x.time?`<div class="mealTime">${x.time}</div>`:''}
        ${x.note?`<div class="mealNote">${x.note}</div>`:''}
        ${x.hints?.length?`<div class="eventHints">${x.hints.map(h=>`<span class="hintTag"># ${h}</span>`).join('')}</div>`:''}
-       ${x.url?`<button class="tiny" onclick='openShared(${JSON.stringify(x.url)})'>${pin}<span>導航</span></button>`:''}
       </div>
+      ${x.url?`<button class="mealNav" onclick='openShared(${JSON.stringify(x.url)})'>${pin}<span>導航</span></button>`:''}
     </div>`).join('')}
    </div>
   </div>`;
